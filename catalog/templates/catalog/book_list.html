@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h1>
+    Book list
+    {% if perms.catalog.add_book %}
+    <a role="button" class="btn btn-primary btn-sm" href="{% url 'book-create' %}">Add new book</a>
+    {% endif %}
+</h1>
+
+{% if book_list %}
+<ul>
+    {% for book in book_list %}
+    <li>
+        <a href="{{ book.get_absolute_url }}">{{ book.title }}</a> ({{ book.author }})
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+    <p>There are no books in the library.</p>
+{% endif %}
+{% endblock %}
